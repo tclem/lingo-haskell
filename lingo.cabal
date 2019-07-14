@@ -1,0 +1,48 @@
+cabal-version:       2.4
+build-type:          Custom
+name:                lingo
+version:             0.1.0.0
+synopsis:            Programming language detection
+homepage:            https://github.com/tclem/lingo
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              Timothy Clem
+maintainer:          timothy.clem@gmail.com
+category:            Data
+extra-source-files:  CHANGELOG.md
+
+custom-setup
+  setup-depends:       Cabal
+                     , base
+                     , bytestring
+                     , containers
+                     , directory
+                     , filepath
+                     , text
+                     , yaml
+
+library
+  exposed-modules: Data.Languages
+
+  -- Modules included in this library but not exported.
+  other-modules: Gen_Languages
+
+  autogen-modules: Gen_Languages
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:       base ^>=4.12.0.0
+                     , bytestring
+                     , containers
+                     , filepath
+                     , raw-strings-qq
+                     , text
+                     , yaml
+
+  -- Directories containing source files.
+  hs-source-dirs:      src
+
+  default-language:    Haskell2010
+  default-extensions:  OverloadedStrings
