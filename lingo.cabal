@@ -9,7 +9,7 @@ license-file:        LICENSE
 author:              Timothy Clem
 maintainer:          timothy.clem@gmail.com
 category:            Data
-extra-source-files:  CHANGELOG.md
+extra-source-files:  README.md
 
 custom-setup
   setup-depends:       Cabal
