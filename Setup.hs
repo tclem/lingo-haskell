@@ -51,19 +51,44 @@ contents yaml =
   <>
   either (BC.pack . show) (B.intercalate ",\n    ") langs
   <>
-  "  ]\n"
+  "  ]\n\
+  \\n\
+  \languagesByExtension :: Map.Map Text [Language]\n\
+  \languagesByExtension = Map.fromList\
+  \  [\n    "
+  <>
+  either (BC.pack . show) (B.intercalate ",\n    ") langsByExt
+  <>
+  "  ]\n\
+  \\n\
+  \languagesByFileName :: Map.Map Text [Language]\n\
+  \languagesByFileName = Map.fromList\
+  \  [\n    "
+  <>
+  either (BC.pack . show) (B.intercalate ",\n    ") langsByFileName
+  <>
+  "  ]\n\
+  \"
 
   where
     langs = Map.foldrWithKey (\k v xs -> "(\"" <> encodeUtf8 k <> "\", " <> BC.pack (show v { languageName = k }) <> ")" : xs) mempty <$> languages
+    langsByExt = Map.foldrWithKey (\k vs xs -> "(\"" <> encodeUtf8 k <> "\", [" <> showLanguages vs <> "])" : xs) mempty <$> languagesByExtension
+    langsByFileName = Map.foldrWithKey (\k vs xs -> "(\"" <> encodeUtf8 k <> "\", [" <> showLanguages vs <> "])" : xs) mempty <$> languagesByFileName
+
+    showLanguages = BC.intercalate ", " . fmap (BC.pack . show)
 
     languages :: Either Y.ParseException (Map.Map Text Language)
     languages = Y.decodeEither' yaml
 
-    languagesByExtension :: Either Y.ParseException (Map.Map Text Language)
-    languagesByExtension = Map.foldrWithKey insertExts mempty <$> languages
-      where
-        insertExts :: Text -> Language -> Map.Map Text Language -> Map.Map Text Language
-        insertExts k lang m = foldr (\ext m -> Map.insert ext lang { languageName = k } m) m (languageExtensions lang)
+    languagesByExtension :: Either Y.ParseException (Map.Map Text [Language])
+    languagesByExtension = Map.foldrWithKey (buildMap languageExtensions) mempty <$> languages
+
+    languagesByFileName :: Either Y.ParseException (Map.Map Text [Language])
+    languagesByFileName = Map.foldrWithKey (buildMap languageFileNames) mempty <$> languages
+
+    buildMap :: (Language -> [Text]) -> Text -> Language -> Map.Map Text [Language] -> Map.Map Text [Language]
+    buildMap f k l m = foldr (\ext b -> Map.insertWith (<>) ext (pure lang) b) m (f lang)
+      where lang = l { languageName = k }
 
 data Language
   = Language
