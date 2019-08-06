@@ -19,4 +19,12 @@ languageForPath path = languageForFileName <|> languageForExtension
   where
     languageForFileName = languageFor (takeFileName path) languagesByFileName
     languageForExtension = languageFor (takeExtension path) languagesByExtension
-    languageFor k f = listToMaybe . fromMaybe mempty $ Map.lookup (Text.pack k) f
+    languageFor k f = maybe Nothing lookupPrimary $ Map.lookup (Text.pack k) f
+
+    -- Some extensions and filenames associate with multiple languages, this is
+    -- a dumb way to specify which is the primary language.
+    lookupPrimary xs
+      | null xs = Nothing
+      | "Markdown" `elem` xs = lookup "Markdown"
+      | otherwise = lookup (head xs)
+      where lookup k = Map.lookup k languages

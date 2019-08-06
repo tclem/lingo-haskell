@@ -15,6 +15,9 @@ main = hspec $ do
     it "returns Nothing for unknown files" $
       languageName <$> languageForPath "noideawhatthisis" `shouldBe` Nothing
 
+    it "returns Nothing for unknown extensions" $
+      languageName <$> languageForPath ".noideawhatthisis" `shouldBe` Nothing
+
   describe "languages" $
     it "parsed languages.yml" $ do
       length languages `shouldBe` 519

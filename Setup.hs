@@ -37,6 +37,8 @@ contents yaml =
   \import Data.Text (Text)\n\
   \import qualified Data.Map.Strict as Map\n\
   \\n\
+  \type LanguageKey = Text\n\
+  \\n\
   \data Language\n\
   \  = Language\n\
   \  { languageID         :: Integer\n\
@@ -45,7 +47,7 @@ contents yaml =
   \  , languageFileNames  :: [Text]\n\
   \  } deriving (Eq, Show)\n\
   \\n\
-  \languages :: Map.Map Text Language\n\
+  \languages :: Map.Map LanguageKey Language\n\
   \languages = Map.fromList\
   \  [\n    "
   <>
@@ -53,7 +55,7 @@ contents yaml =
   <>
   "  ]\n\
   \\n\
-  \languagesByExtension :: Map.Map Text [Language]\n\
+  \languagesByExtension :: Map.Map Text [LanguageKey]\n\
   \languagesByExtension = Map.fromList\
   \  [\n    "
   <>
@@ -61,7 +63,7 @@ contents yaml =
   <>
   "  ]\n\
   \\n\
-  \languagesByFileName :: Map.Map Text [Language]\n\
+  \languagesByFileName :: Map.Map Text [LanguageKey]\n\
   \languagesByFileName = Map.fromList\
   \  [\n    "
   <>
@@ -75,7 +77,8 @@ contents yaml =
     langsByExt = Map.foldrWithKey (\k vs xs -> "(\"" <> encodeUtf8 k <> "\", [" <> showLanguages vs <> "])" : xs) mempty <$> languagesByExtension
     langsByFileName = Map.foldrWithKey (\k vs xs -> "(\"" <> encodeUtf8 k <> "\", [" <> showLanguages vs <> "])" : xs) mempty <$> languagesByFileName
 
-    showLanguages = BC.intercalate ", " . fmap (BC.pack . show)
+    showLanguages = BC.intercalate ", " . fmap (wrap . encodeUtf8 . languageName)
+    wrap x = "\"" <> x <> "\""
 
     languages :: Either Y.ParseException (Map.Map Text Language)
     languages = Y.decodeEither' yaml
