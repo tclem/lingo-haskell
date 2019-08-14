@@ -14,7 +14,7 @@ jobs:
         cabal -V
         cabal update
         cabal install Cabal cabal-install --force-reinstalls
-        export PATH=~/.cabal/bin/cabal:$PATH
+        export PATH=~/.cabal/bin:$PATH
         which cabal
         cabal --version
         cabal new-install --only-dependencies --enable-tests
