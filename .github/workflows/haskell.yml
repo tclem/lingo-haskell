@@ -19,7 +19,10 @@ jobs:
         cabal --version
     - name: Build
       run: |
+        export PATH=~/.cabal/bin:$PATH
         cabal new-configure --enable-tests
         cabal new-build
     - name: Run tests
-      run: cabal new-test
+      run: |
+        export PATH=~/.cabal/bin:$PATH
+        cabal new-test
