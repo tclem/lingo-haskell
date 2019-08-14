@@ -13,7 +13,7 @@ jobs:
       run: |
         cabal -V
         cabal update
-        cabal install Cabal cabal-install
+        cabal install Cabal cabal-install --force-reinstalls
         cabal --version
         cabal new-install --only-dependencies --enable-tests
     - name: Build
