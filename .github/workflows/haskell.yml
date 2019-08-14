@@ -17,7 +17,6 @@ jobs:
         export PATH=~/.cabal/bin:$PATH
         which cabal
         cabal --version
-        cabal new-install --only-dependencies --enable-tests
     - name: Build
       run: |
         cabal new-configure --enable-tests
