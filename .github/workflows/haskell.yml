@@ -4,25 +4,11 @@ on: [push]
 
 jobs:
   build:
-   
+
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
-    - name: Install dependencies
-      run: |
-        cabal -V
-        cabal update
-        cabal install Cabal cabal-install --force-reinstalls
-        export PATH=~/.cabal/bin:$PATH
-        which cabal
-        cabal --version
     - name: Build
       run: |
-        export PATH=~/.cabal/bin:$PATH
-        cabal new-configure --enable-tests
-        cabal new-build
-    - name: Run tests
-      run: |
-        export PATH=~/.cabal/bin:$PATH
-        cabal new-test
+        docker build -t lingo .
