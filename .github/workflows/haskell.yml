@@ -14,6 +14,8 @@ jobs:
         cabal -V
         cabal update
         cabal install Cabal cabal-install --force-reinstalls
+        export PATH=~/.cabal/bin/cabal:$PATH
+        which cabal
         cabal --version
         cabal new-install --only-dependencies --enable-tests
     - name: Build
