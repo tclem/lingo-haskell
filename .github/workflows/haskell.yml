@@ -12,8 +12,9 @@ jobs:
     - name: Install dependencies
       run: |
         cabal -V
+        cabal update
         cabal install Cabal cabal-install
-        cabal -V
+        cabal --version
         cabal new-install --only-dependencies --enable-tests
     - name: Build
       run: |
