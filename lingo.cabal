@@ -3,6 +3,7 @@ build-type:          Custom
 name:                lingo
 version:             0.1.0.0
 synopsis:            Detect a file's programming language
+description:         Lingo use's github/linguist's language registry to enable fast detection of a file path's programming langauge based on extension or filename.
 homepage:            https://github.com/tclem/lingo-haskell
 license:             BSD-3-Clause
 license-file:        LICENSE
@@ -45,3 +46,7 @@ test-suite test
                      , hspec
   default-language:    Haskell2010
   default-extensions:  OverloadedStrings
+
+source-repository head
+  type:     git
+  location: https://github.com/tclem/lingo-haskell
