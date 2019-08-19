@@ -11,6 +11,7 @@ author:              Timothy Clem
 maintainer:          timothy.clem@gmail.com
 category:            Data
 extra-source-files:  README.md
+                   , languages.yml
 
 custom-setup
   setup-depends:       Cabal
