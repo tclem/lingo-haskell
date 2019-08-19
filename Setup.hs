@@ -37,8 +37,10 @@ contents yaml =
   \import Data.Text (Text)\n\
   \import qualified Data.Map.Strict as Map\n\
   \\n\
+  \-- | Type synonym for linguist's language name key.\n\
   \type LanguageKey = Text\n\
   \\n\
+  \-- | Identifies a programming language.\n\
   \data Language\n\
   \  = Language\n\
   \  { languageID         :: Integer\n\
@@ -47,6 +49,7 @@ contents yaml =
   \  , languageFileNames  :: [Text]\n\
   \  } deriving (Eq, Show)\n\
   \\n\
+  \-- | Complete map of programming languages known to linguist.\n\
   \languages :: Map.Map LanguageKey Language\n\
   \languages = Map.fromList\
   \  [\n    "
@@ -55,6 +58,7 @@ contents yaml =
   <>
   "  ]\n\
   \\n\
+  \-- | Map of languages by file extension.\n\
   \languagesByExtension :: Map.Map Text [LanguageKey]\n\
   \languagesByExtension = Map.fromList\
   \  [\n    "
@@ -63,6 +67,7 @@ contents yaml =
   <>
   "  ]\n\
   \\n\
+  \-- | Map of languages by filename.\n\
   \languagesByFileName :: Map.Map Text [LanguageKey]\n\
   \languagesByFileName = Map.fromList\
   \  [\n    "

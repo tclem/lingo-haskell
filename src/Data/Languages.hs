@@ -1,8 +1,12 @@
+-- | Primary interface for looking up the programming language of a file or
+-- interacting with languages known to linguist
+-- (https://github.com/github/linguist).
 module Data.Languages
   ( languageForPath
   , languages
   , languagesByExtension
   , languagesByFileName
+  , LanguageKey
   , Language(..)
   ) where
 
@@ -14,6 +18,7 @@ import qualified Data.Text as Text
 import           Gen_Languages
 import           System.FilePath.Posix
 
+-- | Find the Language (if any) for a FilePath.
 languageForPath :: FilePath -> Maybe Language
 languageForPath path = languageForFileName <|> languageForExtension
   where
