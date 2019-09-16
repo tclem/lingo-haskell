@@ -12,6 +12,9 @@ main = hspec $ do
     it "can detect Ruby by filename" $
       languageName <$> languageForPath "Rakefile" `shouldBe` Just "Ruby"
 
+    it "Gemfile.lock is not Ruby" $
+      languageName <$> languageForPath "Gemfile.lock" `shouldBe` Nothing
+
     it "returns Nothing for unknown files" $
       languageName <$> languageForPath "noideawhatthisis" `shouldBe` Nothing
 
@@ -22,4 +25,4 @@ main = hspec $ do
     it "parsed languages.yml" $ do
       length languages `shouldBe` 519
       length languagesByExtension `shouldBe` 1117
-      length languagesByFileName `shouldBe` 235
+      length languagesByFileName `shouldBe` 234

@@ -1,7 +1,7 @@
 cabal-version:       2.4
 build-type:          Custom
 name:                lingo
-version:             0.1.0.1
+version:             0.2.0.0
 synopsis:            File extension based programming language detection
 description:         Lingo uses github/linguist's language registry to enable fast detection of a file path's programming langauge based on extension or filename.
 homepage:            https://github.com/tclem/lingo-haskell
