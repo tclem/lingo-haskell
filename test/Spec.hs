@@ -1,7 +1,8 @@
 module Main where
 
-import Test.Hspec
 import Data.Languages
+import Data.List (sort)
+import Test.Hspec
 
 main :: IO ()
 main = hspec $ do
@@ -11,6 +12,9 @@ main = hspec $ do
 
     it "can detect Ruby by filename" $
       languageName <$> languagesForPath "Rakefile" `shouldBe` ["Ruby"]
+
+    it "returns all languages that a PHP file could be" $
+      sort (languageName <$> languagesForPath "test.php") `shouldBe` ["Hack", "PHP"]
 
     it "Gemfile.lock is not Ruby" $
       languageName <$> languagesForPath "Gemfile.lock" `shouldBe` []
