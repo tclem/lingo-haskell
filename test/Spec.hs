@@ -1,25 +1,29 @@
 module Main where
 
-import Test.Hspec
 import Data.Languages
+import Data.List (sort)
+import Test.Hspec
 
 main :: IO ()
 main = hspec $ do
   describe "detect language for path" $ do
     it "can detect Ruby by file extension" $
-      languageName <$> languageForPath "test.rb" `shouldBe` Just "Ruby"
+      languageName <$> languagesForPath "test.rb" `shouldBe` ["Ruby"]
 
     it "can detect Ruby by filename" $
-      languageName <$> languageForPath "Rakefile" `shouldBe` Just "Ruby"
+      languageName <$> languagesForPath "Rakefile" `shouldBe` ["Ruby"]
+
+    it "returns all languages that a PHP file could be" $
+      sort (languageName <$> languagesForPath "test.php") `shouldBe` ["Hack", "PHP"]
 
     it "Gemfile.lock is not Ruby" $
-      languageName <$> languageForPath "Gemfile.lock" `shouldBe` Nothing
+      languageName <$> languagesForPath "Gemfile.lock" `shouldBe` []
 
     it "returns Nothing for unknown files" $
-      languageName <$> languageForPath "noideawhatthisis" `shouldBe` Nothing
+      languageName <$> languagesForPath "noideawhatthisis" `shouldBe` []
 
     it "returns Nothing for unknown extensions" $
-      languageName <$> languageForPath ".noideawhatthisis" `shouldBe` Nothing
+      languageName <$> languagesForPath ".noideawhatthisis" `shouldBe` []
 
   describe "languages" $
     it "parsed languages.yml" $ do

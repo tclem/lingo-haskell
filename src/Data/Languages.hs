@@ -2,7 +2,7 @@
 -- interacting with languages known to linguist
 -- (https://github.com/github/linguist).
 module Data.Languages
-  ( languageForPath
+  ( languagesForPath
   , languages
   , languagesByExtension
   , languagesByFileName
@@ -18,18 +18,16 @@ import qualified Data.Text as Text
 import           Gen_Languages
 import           System.FilePath.Posix
 
--- | Find the Language (if any) for a FilePath.
-languageForPath :: FilePath -> Maybe Language
-languageForPath path = languageForFileName <|> languageForExtension
+-- | Find the set of possible languages for a given file path.
+--
+-- Multiple results will be returned for ambiguous files; for example, @.md@ files can be Markdown or GCC machine descriptions, and @.php@ files can be PHP or Hack source files.
+languagesForPath :: FilePath -> [Language]
+languagesForPath path = languageForFileName <|> languageForExtension
   where
     languageForFileName = languageFor (takeFileName path) languagesByFileName
     languageForExtension = languageFor (takeExtension path) languagesByExtension
-    languageFor k f = maybe Nothing lookupPrimary $ Map.lookup (Text.pack k) f
-
-    -- Some extensions and filenames associate with multiple languages, this is
-    -- a dumb way to specify which is the primary language.
-    lookupPrimary xs
-      | null xs = Nothing
-      | "Markdown" `elem` xs = lookup "Markdown"
-      | otherwise = lookup (head xs)
-      where lookup k = Map.lookup k languages
+    languageFor :: String -> Map.Map Text [LanguageKey] -> [Language]
+    languageFor k
+      = foldMap (maybeToList . flip Map.lookup languages)
+      . fromMaybe []
+      . Map.lookup (Text.pack k)
