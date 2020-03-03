@@ -27,6 +27,6 @@ main = hspec $ do
 
   describe "languages" $
     it "parsed languages.yml" $ do
-      length languages `shouldBe` 519
-      length languagesByExtension `shouldBe` 1117
-      length languagesByFileName `shouldBe` 234
+      length languages `shouldBe` 550
+      length languagesByExtension `shouldBe` 1151
+      length languagesByFileName `shouldBe` 254
