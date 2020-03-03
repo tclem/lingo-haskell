@@ -4690,7 +4690,8 @@ Ruby:
   - Deliverfile
   - Fastfile
   - Gemfile
-  - Gemfile.lock
+  # Gemfile.lock is not valid Ruby.
+  # - Gemfile.lock
   - Guardfile
   - Jarfile
   - Mavenfile
