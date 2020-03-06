@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Usage: script/update-languages REF
+# where REF is the linguist ref to copy `languages.yml` from.
+# If no REF is supplied, the default REF is master.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ "$1" != "" ]; then
+  REF=$1
+else
+  REF="master"
+fi
+
+# Curl for the langauges.yml file for the $REF.
+curl -sH 'Accept: application/vnd.github.v3.raw' https://api.github.com/repos/github/linguist/contents/lib/linguist/languages.yml?ref=$REF > languages.yml
+
+# Comment out "- Gemfile.lock" using an in-place file substitution.
+sed -i '' 's/  - Gemfile.lock/  # - Gemfile.lock/' ./languages.yml
+
+# Generate new Language constructors.
+cabal new-update
+cabal new-configure
+cabal new-build
