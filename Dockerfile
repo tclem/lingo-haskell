@@ -1,4 +1,4 @@
-FROM haskell:8.6 as build
+FROM haskell:8.8 as build
 WORKDIR /build
 
 COPY . .
