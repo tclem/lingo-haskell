@@ -4,21 +4,22 @@
 -- interacting with languages known to linguist
 -- (https://github.com/github/linguist).
 module Data.Languages
-  ( languagesForPath
-  , languages
-  , languagesByExtension
-  , languagesByFileName
-  , LanguageKey
-  , Language(..)
-  ) where
+  ( languagesForPath,
+    languages,
+    languagesByExtension,
+    languagesByFileName,
+    LanguageKey,
+    Language (..),
+  )
+where
 
-import           Control.Applicative
+import Control.Applicative
+import Data.Languages.Templates
 import qualified Data.Map.Strict as Map
-import           Data.Maybe
-import           Data.Text (Text)
+import Data.Maybe
+import Data.Text (Text)
 import qualified Data.Text as Text
-import           Data.Languages.Templates
-import           System.FilePath.Posix
+import System.FilePath.Posix
 
 $(generateLanguageMap)
 
@@ -31,7 +32,7 @@ languagesForPath path = languageForFileName <|> languageForExtension
     languageForFileName = languageFor (takeFileName path) languagesByFileName
     languageForExtension = languageFor (takeExtension path) languagesByExtension
     languageFor :: String -> Map.Map Text [LanguageKey] -> [Language]
-    languageFor k
-      = foldMap (maybeToList . flip Map.lookup languages)
-      . fromMaybe []
-      . Map.lookup (Text.pack k)
+    languageFor k =
+      foldMap (maybeToList . flip Map.lookup languages)
+        . fromMaybe []
+        . Map.lookup (Text.pack k)

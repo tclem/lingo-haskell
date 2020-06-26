@@ -21,11 +21,13 @@ haskell_toolchain_library(name = "filepath")
 
 haskell_toolchain_library(name = "text")
 
+haskell_toolchain_library(name = "template-haskell")
+
 haskell_library(
     name = "lingo",
     srcs = glob(["src/**/*.hs"]),
     compiler_flags = [
-        '-DLANGUAGES_YAML_PATH="../../$(rootpath :languages.yml)"',
+        '-DLANGUAGES_YAML_PATH="$(rootpath :languages.yml)"',
     ],
     extra_srcs = ["languages.yml"],
     deps = [
@@ -33,6 +35,7 @@ haskell_library(
         ":bytestring",
         ":containers",
         ":filepath",
+        ":template-haskell",
         ":text",
         "@stackage//:aeson",
         "@stackage//:raw-strings-qq",
