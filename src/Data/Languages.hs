@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 -- | Primary interface for looking up the programming language of a file or
 -- interacting with languages known to linguist
 -- (https://github.com/github/linguist).
@@ -15,8 +17,10 @@ import qualified Data.Map.Strict as Map
 import           Data.Maybe
 import           Data.Text (Text)
 import qualified Data.Text as Text
-import           Gen_Languages
+import           Data.Languages.Templates
 import           System.FilePath.Posix
+
+$(generateLanguageMap)
 
 -- | Find the set of possible languages for a given file path.
 --
