@@ -70,11 +70,11 @@ generateLanguageMap = do
 
   [d|
     languages :: Map.Map LanguageKey Language
-    languages = Map.fromList $(lift (Map.toList normalizedLangs))
+    languages = Map.fromDistinctAscList $(lift (Map.toAscList normalizedLangs))
 
     languagesByExtension :: Map.Map String [LanguageKey]
-    languagesByExtension = Map.fromList $(lift (Map.toList byExtension))
+    languagesByExtension = Map.fromDistinctAscList $(lift (Map.toAscList byExtension))
 
     languagesByFileName :: Map.Map String [LanguageKey]
-    languagesByFileName = Map.fromList $(lift (Map.toList byFileName))
+    languagesByFileName = Map.fromDistinctAscList $(lift (Map.toAscList byFileName))
     |]
