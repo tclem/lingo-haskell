@@ -31,8 +31,8 @@ languagesForPath path = languageForFileName <|> languageForExtension
   where
     languageForFileName = languageFor (takeFileName path) languagesByFileName
     languageForExtension = languageFor (takeExtension path) languagesByExtension
-    languageFor :: String -> Map.Map Text [LanguageKey] -> [Language]
+    languageFor :: String -> Map.Map String [LanguageKey] -> [Language]
     languageFor k =
       foldMap (maybeToList . flip Map.lookup languages)
         . fromMaybe []
-        . Map.lookup (Text.pack k)
+        . Map.lookup k
