@@ -30,7 +30,7 @@ type LanguageKey = Text
 -- | Identifies a programming language.
 data Language = Language
   { languageId :: Integer,
-    languageName :: LanguageKey,
+    languageName :: Text,
     languageExtensions :: [Text],
     languageFileNames :: [Text]
   }
