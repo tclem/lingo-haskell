@@ -10,6 +10,7 @@ module Data.Languages
     languagesByFileName,
     LanguageKey,
     Language (..),
+    languageName
   )
 where
 

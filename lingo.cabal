@@ -14,7 +14,8 @@ extra-source-files:  README.md
                    , ChangeLog.md
 data-files:          languages.yml
 
-tested-with:         GHC == 8.8.1
+tested-with:         GHC == 8.8.3
+                     GHC == 8.10.1
 
 library
   exposed-modules:     Data.Languages
