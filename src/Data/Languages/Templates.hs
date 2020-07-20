@@ -9,6 +9,7 @@ module Data.Languages.Templates
   ( Language (..),
     LanguageKey,
     generateLanguageMap,
+    languageName,
   )
 where
 
