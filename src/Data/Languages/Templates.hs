@@ -40,10 +40,9 @@ instance FromJSON Language where
   parseJSON = withObject "Language" $ \l ->
     Language
       <$> l .: "language_id"
-      <*> pure "<ERROR: Unnamed language (this is a bug in Template Haskell)"
+      <*> "" -- this is set later in map iteration
       <*> l .:? "extensions" .!= []
       <*> l .:? "filenames" .!= []
-
 
 languagesYamlPath :: IO String
 #ifdef LANGUAGES_YAML_PATH
