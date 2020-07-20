@@ -40,7 +40,7 @@ instance FromJSON Language where
   parseJSON = withObject "Language" $ \l ->
     Language
       <$> l .: "language_id"
-      <*> "" -- this is set later in map iteration
+      <*> pure "" -- this is set later in map iteration
       <*> l .:? "extensions" .!= []
       <*> l .:? "filenames" .!= []
 
