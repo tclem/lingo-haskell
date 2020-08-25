@@ -1,5 +1,5 @@
 cabal-version:       2.4
-build-type:          Custom
+build-type:          Simple
 name:                lingo
 version:             0.4.0.0
 synopsis:            File extension based programming language detection
@@ -11,11 +11,11 @@ author:              Timothy Clem
 maintainer:          timothy.clem@gmail.com
 category:            Data
 extra-source-files:  README.md
-                   , languages.yml
                    , ChangeLog.md
+data-files:          languages.yml
 
 tested-with:         GHC == 8.6.5
-                     GHC == 8.8.1
+                     GHC == 8.8.3
                      GHC == 8.10.1
 
 custom-setup
@@ -29,15 +29,18 @@ custom-setup
                      , yaml
 
 library
-  exposed-modules: Data.Languages
-  other-modules: Gen_Languages
-  autogen-modules: Gen_Languages
+  exposed-modules:     Data.Languages
+                     , Data.Languages.Templates
+  autogen-modules:     Paths_lingo
+  other-modules:       Paths_lingo
   build-depends:       base >= 4.12 && < 5
+                     , aeson >= 1.4 && <2
                      , bytestring ^>= 0.10.8.2
                      , containers ^>= 0.6.0.1
                      , filepath ^>= 1.4.2.1
                      , raw-strings-qq ^>= 1.1
                      , text ^>= 1.2.3.2
+                     , template-haskell >= 2.15.0.0 && < 2.17.0.0
                      , yaml ^>= 0.11.1.2
   hs-source-dirs:      src
   default-language:    Haskell2010
