@@ -14,19 +14,9 @@ extra-source-files:  README.md
                    , ChangeLog.md
 data-files:          languages.yml
 
-tested-with:         GHC == 8.6.5
-                     GHC == 8.8.1
-                     GHC == 8.10.1
-
-custom-setup
-  setup-depends:       Cabal
-                     , base
-                     , bytestring
-                     , containers
-                     , directory
-                     , filepath
-                     , text
-                     , yaml
+tested-with:  GHC == 8.6.5
+            , GHC == 8.8.1
+            , GHC == 8.10.1
 
 library
   exposed-modules:     Data.Languages
