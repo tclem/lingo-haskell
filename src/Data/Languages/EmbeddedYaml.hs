@@ -8,4 +8,4 @@ import Data.ByteString (ByteString)
 import Data.FileEmbed
 
 languageYamlByteString :: ByteString
-languageYamlByteString = $(embedFile "languages.yml")
+languageYamlByteString = $(makeRelativeToProject "languages.yml" >>= embedFile)
