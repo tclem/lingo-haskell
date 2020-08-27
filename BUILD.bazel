@@ -38,6 +38,7 @@ haskell_library(
         ":template-haskell",
         ":text",
         "@stackage//:aeson",
+        "@stackage//:file-embed",
         "@stackage//:raw-strings-qq",
         "@stackage//:yaml",
     ],

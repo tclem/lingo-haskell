@@ -38,6 +38,7 @@ stack_snapshot(
     local_snapshot = "//:stack-snapshot.yaml",
     packages = [
         "aeson",
+        "file-embed",
         "raw-strings-qq",
         "yaml",
     ],
