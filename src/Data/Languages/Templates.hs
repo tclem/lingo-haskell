@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveLift #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -22,9 +21,7 @@ import Data.Yaml
 import GHC.Generics (Generic)
 import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
-#ifndef LANGUAGES_YAML_PATH
-import Paths_lingo
-#endif
+import qualified Data.Languages.EmbeddedYaml as Embedded
 
 -- | Type synonym for linguist's language name key.
 type LanguageKey = String
@@ -49,17 +46,10 @@ instance FromJSON Language where
       <*> l .:? "extensions" .!= []
       <*> l .:? "filenames" .!= []
 
-languagesYamlPath :: IO String
-#ifdef LANGUAGES_YAML_PATH
-languagesYamlPath = pure LANGUAGES_YAML_PATH
-#else
-languagesYamlPath = getDataFileName "languages.yml"
-#endif
 
 generateLanguageMap :: DecsQ
 generateLanguageMap = do
-  langYaml <- runIO languagesYamlPath
-  langs <- runIO (decodeFileThrow @IO @(Map.Map LanguageKey Language) langYaml)
+  langs <- runIO (decodeThrow @IO @(Map.Map LanguageKey Language) Embedded.languageYamlByteString)
   let normalizedLangs = Map.mapWithKey (\name lang -> lang {languageKey = name}) langs
 
       byExtension = Map.foldr (process languageExtensions) mempty normalizedLangs

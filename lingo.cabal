@@ -20,6 +20,7 @@ tested-with:  GHC == 8.6.5
 
 library
   exposed-modules:     Data.Languages
+                     , Data.Languages.EmbeddedYaml
                      , Data.Languages.Templates
   autogen-modules:     Paths_lingo
   other-modules:       Paths_lingo
@@ -28,6 +29,7 @@ library
                      , bytestring ^>= 0.10.8.2
                      , containers ^>= 0.6.0.1
                      , filepath ^>= 1.4.2.1
+                     , file-embed ^>= 0.0.13
                      , raw-strings-qq ^>= 1.1
                      , text ^>= 1.2.3.2
                      , template-haskell >= 2.14.0.0 && < 2.17.0.0
