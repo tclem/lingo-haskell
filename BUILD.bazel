@@ -26,6 +26,7 @@ haskell_toolchain_library(name = "template-haskell")
 haskell_library(
     name = "lingo",
     srcs = glob(["src/**/*.hs"]),
+    compiler_flags = ["-XOverloadedStrings"],
     deps = [
         ":base",
         ":bytestring",
