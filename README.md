@@ -5,13 +5,7 @@ Detect programming languages from file extensions and common filenames. Based on
 ## Development
 
 ```
-cabal v2-update
-cabal v2-configure
-cabal v2-build
-```
-
-You can also use the [Bazel](https://haskell.build) build system:
-
-```
-bazel build //...
+cabal new-update
+cabal new-configure
+cabal new-build
 ```
