@@ -1,32 +1,24 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+module Main (main) where
+
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import           Debug.Trace
-import           Distribution.PackageDescription
-import           Distribution.Simple hiding (Language)
-import           Distribution.Simple.BuildPaths
-import           Distribution.Simple.LocalBuildInfo
-import           Distribution.Simple.Setup
 import           System.Directory
-import           System.FilePath.Posix ((</>))
+import           System.FilePath ((</>))
 import qualified Data.Map.Strict as Map
 import           Data.Text (Text)
 import           Data.Text.Encoding (encodeUtf8)
 import qualified Data.Yaml as Y
 import           Data.Yaml (FromJSON (..), (.!=), (.:), (.:?))
 
-main = defaultMainWithHooks simpleUserHooks { postConf = conf }
-
-conf :: Args -> ConfigFlags -> PackageDescription -> LocalBuildInfo -> IO ()
-conf _ _ _ info = do
-  let autogenDir = autogenPackageModulesDir info
-  createDirectoryIfMissing True autogenDir
-  traceM $ "Writing Gen_Languages.hs to autogenDir: " <> autogenDir
+main :: IO ()
+main = do
   dir <- getCurrentDirectory
   let yamlFile = dir </> "languages.yml"
   yaml <- B.readFile yamlFile
-  B.writeFile (autogenDir </> "Gen_Languages.hs") (contents yaml)
+  B.writeFile (dir </> "src" </> "Gen_Languages.hs") (contents yaml)
   pure ()
 
 contents :: B.ByteString -> B.ByteString
