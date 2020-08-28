@@ -40,5 +40,5 @@ stack_snapshot(
         "raw-strings-qq",
         "yaml",
     ],
-    snapshot = "lts-13.15",
+    snapshot = "lts-16.11",
 )
