@@ -1,3 +1,7 @@
+# 0.5.0.0
+
+Revert to API provided by the 0.3 versions.
+
 # 0.4.0.0
 
 Rewrite to use Template Haskell splices instead of a custom Setup.hs.

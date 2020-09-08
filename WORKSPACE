@@ -7,9 +7,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Download rules_haskell and make it accessible as "@rules_haskell".
 http_archive(
     name = "rules_haskell",
-    sha256 = "56a8e6337df8802f1e0e7d2b3d12d12d5d96c929c8daecccc5738a0f41d9c1e4",
-    strip_prefix = "rules_haskell-0.12",
-    urls = ["https://github.com/tweag/rules_haskell/archive/v0.12.tar.gz"],
+    sha256 = "78d017aa732b430c0681fff4514503af78a8d8c44df165e603a9433745b16e5e",
+    strip_prefix = "rules_haskell-abaec6502a4474f10b3c367fb5e90173ee0e349c",
+    urls = ["https://github.com/tweag/rules_haskell/archive/abaec6502a4474f10b3c367fb5e90173ee0e349c.tar.gz"],
 )
 
 load(
@@ -35,10 +35,10 @@ load(
 
 stack_snapshot(
     name = "stackage",
-    local_snapshot = "//:stack-snapshot.yaml",
     packages = [
         "aeson",
         "raw-strings-qq",
         "yaml",
     ],
+    snapshot = "lts-16.11",
 )

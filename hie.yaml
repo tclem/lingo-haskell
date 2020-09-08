@@ -1,0 +1,8 @@
+cradle:
+  cabal:
+    - path: "./src"
+      component: "lib:lingo"
+    - path: "./app"
+      component: "exe:generate"
+    - path: "./test"
+      component: "test:lingo-test"
