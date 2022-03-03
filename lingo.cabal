@@ -14,8 +14,8 @@ extra-source-files:  README.md
                    , languages.yml
                    , ChangeLog.md
 
-tested-with:         GHC == 8.8.4
-                     GHC == 8.10.7
+tested-with:         GHC == 8.8.3
+                     GHC == 8.10.1
                      GHC == 9.2.1
 
 common haskell
