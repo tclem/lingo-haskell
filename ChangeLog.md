@@ -1,3 +1,7 @@
+# 0.5.0.2
+
+Loosen the upper bound on `bytestring`.
+
 # 0.5.0.1
 
 Support `ghc` 9.2.
