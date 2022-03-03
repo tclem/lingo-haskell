@@ -1,3 +1,7 @@
+# 0.5.0.1
+
+Support `ghc` 9.2.
+
 # 0.5.0.0
 
 Revert to API provided by the 0.3 versions.
