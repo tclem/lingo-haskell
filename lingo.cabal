@@ -11,7 +11,6 @@ author:              Timothy Clem
 maintainer:          timothy.clem@gmail.com
 category:            Data
 extra-source-files:  README.md
-                   , languages.yml
                    , ChangeLog.md
 
 tested-with:         GHC == 8.8.3
