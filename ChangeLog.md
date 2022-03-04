@@ -1,3 +1,7 @@
+# 0.5.0.3
+
+Remove `Gen_Languages` from the `autogen-modules` field, and `languages.yml` from the `extra-source-files` field.
+
 # 0.5.0.2
 
 Loosen the upper bound on `bytestring`.
